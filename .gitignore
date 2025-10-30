@@ -1,6 +1,5 @@
 .sonarqube
 
-owasp
-!owasp/suppression.xml
+owasp/report
 
 TestResults

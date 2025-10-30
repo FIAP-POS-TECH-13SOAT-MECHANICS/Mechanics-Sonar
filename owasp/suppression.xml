@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+  <!-- Falso positivo: OWASP vincula incorretamente SystemEvents.dll a um pacote PHP -->
+  <suppress>
+    <notes>
+      CVE-2018-25076 é relacionado ao BigTree CMS (PHP),
+      e não se aplica a bibliotecas .NET como Microsoft.Win32.SystemEvents.dll.
+    </notes>
+    <filePath regex="true">.*Microsoft\.Win32\.SystemEvents\.dll</filePath>
+    <cve>CVE-2018-25076</cve>
+  </suppress>
+</suppressions>

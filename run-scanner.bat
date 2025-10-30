@@ -1,7 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 
-REM Valida se o token foi recebido
+rem Valida se o token foi recebido
 if "%~1"=="" (
     echo ERRO: Token do SonarQube nao fornecido!
     echo Uso: %~nx0 ^<SONAR_TOKEN^>
@@ -10,7 +10,7 @@ if "%~1"=="" (
 
 set SONAR_TOKEN=%~1
 
-REM Valida dependencias e submodulo
+rem Valida dependencias e submodulo
 set DEPENDENCIES_OK=1
 
 where java >nul 2>&1
@@ -63,17 +63,19 @@ echo --- Iniciando analise OWASP + SonarQube ---
 echo KEY: fiap-mechanics
 echo URL: http://localhost:9000
 echo ===========================================
-echo.
 
+echo.
 echo --- Executando analise OWASP ---
 echo.
+
+if exist "owasp/report" (rmdir /s /q "owasp/report")
 
 docker run ^
   --name fiap-sonar-owasp ^
   --rm ^
   -e TZ=America/Sao_Paulo ^
   -v ./project/src:/src ^
-  -v ./owasp/dependency-check-data:/usr/share/dependency-check/data ^
+  -v fiap-sonar-owasp-data:/usr/share/dependency-check/data ^
   -v ./owasp:/data ^
   owasp/dependency-check:latest ^
     --scan /src ^
@@ -82,13 +84,15 @@ docker run ^
     --format "ALL" ^
     --enableExperimental ^
     --disableRetireJS ^
-    --suppression /data/suppression.xml
+    --suppression /data/suppression.xml ^
+    --nvdApiKey "083c5238-a34d-470d-89c7-cba6431c2d4f"
+
+echo.
+echo --- Executando analise SonarQube ---
+echo.
 
 rmdir /s /q TestResults
 if not exist "TestResults" mkdir "TestResults"
-
-echo --- Executando analise SonarQube ---
-echo.
 
 dotnet-sonarscanner begin ^
   /k:fiap-mechanics ^
@@ -113,7 +117,7 @@ echo --- Executando testes e gerando cobertura ---
 dotnet test project\Fiap.Mechanics.sln ^
   --collect:"XPlat Code Coverage;Format=opencover" ^
   --results-directory "TestResults" ^
-  --logger "trx;LogFileName=testresults.trx"
+  --logger "trx"
 
 if errorlevel 1 exit /b 3
 
