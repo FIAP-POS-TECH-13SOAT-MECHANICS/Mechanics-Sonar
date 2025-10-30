@@ -25,12 +25,6 @@ if errorlevel 1 (
     set DEPENDENCIES_OK=0
 )
 
-dotnet --version 2>nul | findstr /r "^8\." >nul 2>&1
-if errorlevel 1 (
-    echo Dotnet SDK 8 nao instalado!
-    set DEPENDENCIES_OK=0
-)
-
 dotnet tool list -g 2>nul | findstr "dotnet-sonarscanner" >nul 2>&1
 if errorlevel 1 (
     echo Dotnet SonarScanner nao instalado!
@@ -65,11 +59,30 @@ if !DEPENDENCIES_OK!==0 (
 )
 
 echo ===========================================
-echo --- Iniciando analise SonarQube + OWASP ---
+echo --- Iniciando analise OWASP + SonarQube ---
 echo KEY: fiap-mechanics
 echo URL: http://localhost:9000
 echo ===========================================
 echo.
+
+echo --- Executando analise OWASP ---
+echo.
+
+docker run ^
+  --name fiap-sonar-owasp ^
+  --rm ^
+  -e TZ=America/Sao_Paulo ^
+  -v ./project/src:/src ^
+  -v ./owasp/dependency-check-data:/usr/share/dependency-check/data ^
+  -v ./owasp:/data ^
+  owasp/dependency-check:latest ^
+    --scan /src ^
+    --project fiap-mechanics ^
+    --out /data/report ^
+    --format "ALL" ^
+    --enableExperimental ^
+    --disableRetireJS ^
+    --suppression /data/suppression.xml
 
 rmdir /s /q TestResults
 if not exist "TestResults" mkdir "TestResults"
