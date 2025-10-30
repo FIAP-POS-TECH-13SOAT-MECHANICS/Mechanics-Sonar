@@ -25,8 +25,8 @@ Este guia descreve como configurar o ambiente, executar a análise e visualizar 
 Antes de iniciar, verifique se você possui instalado:
 
 - 🐳 [Docker](https://docs.docker.com/get-docker/)
-- 🧩 [Docker Compose](https://docs.docker.com/compose/)
 - 🟣 [.NET SDK 8.0+](https://dotnet.microsoft.com/en-us/download)
+- ☕ [Java Runtime](https://www.java.com/pt-BR/download)
 
 ---
 
