@@ -1,0 +1,25 @@
+name: fiap-sonar
+
+services:
+  sonarqube:
+    image: sonarqube:community
+    ports:
+      - "9000:9000"
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+      - SONAR_WEB_JAVAOPTS=-Xmx512m
+    volumes:
+      - data:/opt/sonarqube/data
+      - extensions:/opt/sonarqube/extensions
+      - logs:/opt/sonarqube/logs
+      - temp:/opt/sonarqube/temp
+
+volumes:
+  data:
+    name: fiap-sonar-data
+  extensions:
+    name: fiap-sonar-extensions
+  logs:
+    name: fiap-sonar-logs
+  temp:
+    name: fiap-sonar-temp
