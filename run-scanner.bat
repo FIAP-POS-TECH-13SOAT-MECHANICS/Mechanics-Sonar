@@ -100,6 +100,7 @@ dotnet-sonarscanner begin ^
   /d:sonar.token=%SONAR_TOKEN% ^
   /d:sonar.cs.opencover.reportsPaths=TestResults/**/coverage.opencover.xml ^
   /d:sonar.coverage.exclusions=**/Migrations/**,**/Program.cs ^
+  /d:sonar.exclusions=**/Migrations/** ^
   /d:sonar.dependencyCheck.reportPath=/owasp/dependency-check-report.xml ^
   /d:sonar.dependencyCheck.htmlReportPath=/owasp/dependency-check-report.html ^
   /d:sonar.dependencyCheck.jsonReportPath=/owasp/dependency-check-report.json
