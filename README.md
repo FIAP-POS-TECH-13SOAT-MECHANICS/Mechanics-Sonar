@@ -96,7 +96,7 @@ Substitua `<SONAR_TOKEN>` pelo token criado no passo anterior.
 
 Após a conclusão, acesse novamente o SonarQube:
 
-🔗 [http://localhost:9000](http://localhost:9000)
+🔗 [http://localhost:9000](http://localhost:9000/dashboard?id=fiap-mechanics)
 
 Você poderá visualizar:
 
