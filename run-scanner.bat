@@ -58,11 +58,11 @@ if !DEPENDENCIES_OK!==0 (
     exit /b 2
 )
 
-echo ===========================================
-echo --- Iniciando analise OWASP + SonarQube ---
-echo KEY: fiap-mechanics
-echo URL: http://localhost:9000
-echo ===========================================
+echo =================================================
+echo --- Iniciando analise ZAP + OWASP + SonarQube ---
+echo   KEY: fiap-mechanics
+echo   URL: http://localhost:9000
+echo =================================================
 
 echo.
 echo --- Iniciando o projeto ---
