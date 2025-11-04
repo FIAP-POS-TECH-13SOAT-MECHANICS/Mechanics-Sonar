@@ -120,12 +120,25 @@ Abra esse arquivo no navegador para visualizar as dependências e suas respectiv
 
 ---
 
+### **8️⃣ Acessar o relatório ZAP**
+
+O relatório detalhado de API REST será gerado em:
+
+```
+zap/report/report.html
+```
+
+Abra esse arquivo no navegador para visualizar os alertas e recomendações.
+
+---
+
 ## 🛠️ Ferramentas utilizadas
 
 | Ferramenta | Função principal |
 |-------------|------------------|
 | 🧠 **SonarQube** | Análise estática de código e métricas de qualidade |
 | 🛡️ **OWASP Dependency Check** | Verificação de vulnerabilidades em dependências |
+| ⚡ **ZAP** | Verificação de vulnerabilidades em APIs REST |
 | 🧪 **.NET Test + OpenCover** | Execução de testes e geração de cobertura |
 | 🐳 **Docker Compose** | Orquestração dos containers |
 | ⚙️ **Sonar Scanner for .NET** | Envio de relatórios ao SonarQube |
